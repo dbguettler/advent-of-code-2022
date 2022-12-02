@@ -11,19 +11,15 @@ Included is code from Advent of Code 2022. Each day has a folder, with solution 
 As an example, to run day one code in debug mode (with small input file):
 
 ```bash
-$ node main.js debug
+cd day1 && node main debug
 ```
 
 To run with full size input file:
 
 ```bash
-$ node main.js
+cd day1 && node main
 ```
 
-## Naming
+## Files
 
-The main code file for each day is provided in a file `main.js`, with the files `input-sm.txt` for the example small input file and `input-lg.txt` for the full size provided input.
-
-## Shared Code
-
-Any useful utility functions used for multiple days is be included in `shared/utils.js`.
+The main code file for each day is provided in `main.js`, with the files `input-sm.txt` for the example small input file and `input-lg.txt` for the full size provided input. Any useful utility functions used across multiple days are included in `shared/utils.js`.
