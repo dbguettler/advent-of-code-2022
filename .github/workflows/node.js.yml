@@ -16,6 +16,5 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
-    - run: cd day1
-    - run: node main debug
-    - run: node main
+    - run: node day1/main debug
+    - run: node day1/main
