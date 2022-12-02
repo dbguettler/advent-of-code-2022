@@ -14,7 +14,7 @@ As an example, to run day one code in debug mode (with small input file):
 cd day1 && node main debug
 ```
 
-To run with full size input file:
+To run with full size input file, simply exclude the `debug` argument:
 
 ```bash
 cd day1 && node main
