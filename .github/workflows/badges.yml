@@ -4,7 +4,7 @@ name: Update Badges
 
 on:
   schedule:
-    - cron: '52 7 1-26 12 *'
+    - cron: '32 6 1-26 12 *'
 
 jobs:
   update:
