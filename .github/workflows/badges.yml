@@ -9,16 +9,15 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-    environment: badge
     steps:
-      - uses: actions/checkout@v2                # clones your repo
+      - uses: actions/checkout@v2
           
       - uses: joblo2213/aoc-badges-action@v3
         with:
           userid: 1998317
           session: ${{ secrets.AOC_SESSION }}
       
-      - uses: stefanzweifel/git-auto-commit-action@v4     # Step that pushes these local changes back to your github repo
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update badges
           file_pattern: README.md
