@@ -5,48 +5,51 @@ const lines = utils.getLines(process.argv);
 
 const SCORES = {
   A: {
-    R: 1 + 3,
-    P: 2 + 6,
-    S: 3 + 0,
+    X: 1 + 3,
+    Y: 2 + 6,
+    Z: 3 + 0,
   },
   B: {
-    R: 1 + 0,
-    P: 2 + 3,
-    S: 3 + 6,
+    X: 1 + 0,
+    Y: 2 + 3,
+    Z: 3 + 6,
   },
   C: {
-    R: 1 + 6,
-    P: 2 + 0,
-    S: 3 + 3,
+    X: 1 + 6,
+    Y: 2 + 0,
+    Z: 3 + 3,
   },
 };
 
 const MOVES = {
   A: {
-    X: "S",
-    Y: "R",
-    Z: "P",
+    X: "Z",
+    Y: "X",
+    Z: "Y",
   },
   B: {
-    X: "R",
-    Y: "P",
-    Z: "S",
+    X: "X",
+    Y: "Y",
+    Z: "Z",
   },
   C: {
-    X: "P",
-    Y: "S",
-    Z: "R",
+    X: "Y",
+    Y: "Z",
+    Z: "X",
   },
 };
 
-let total = 0;
+let two = 0;
+let one = 0;
 for (const line of lines) {
   const opponent = line.at(0);
-  const goal = line.at(2);
-  const self = MOVES[opponent][goal];
-  total += SCORES[opponent][self];
+  const sym = line.at(2);
+  one += SCORES[opponent][sym];
+  const self = MOVES[opponent][sym];
+  two += SCORES[opponent][self];
 }
 
-console.log(`Total score: ${total}`);
+console.log(`Part One: ${one}`);
+console.log(`Part Two: ${two}`);
 
 console.log(`\nCompleted in ${Date.now() - startTime} milliseconds.`);
