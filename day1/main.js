@@ -24,9 +24,7 @@ for (let i = 0; i <= lines.length; i++) {
   }
 }
 
-console.log(`1. ${max[2]} calories`);
-console.log(`2. ${max[1]} calories`);
-console.log(`3. ${max[0]} calories`);
-console.log(`Total: ${max[0] + max[1] + max[2]} calories`);
+console.log(`Part One: ${max[2]} calories`);
+console.log(`Part Two: ${max[0] + max[1] + max[2]} calories`);
 
 console.log(`\nCompleted in ${Date.now() - startTime} milliseconds.`);
