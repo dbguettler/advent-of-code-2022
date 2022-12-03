@@ -1,4 +1,6 @@
 const utils = require("../shared/utils");
+const CHAR_A = 97;
+const CHAR_a = 65;
 
 /**
  * Part 1 Implementation
@@ -16,7 +18,7 @@ function part1() {
     for (let i = line.length / 2; i < line.length; i++) {
       if (s.has(line.charAt(i))) {
         const code = line.charCodeAt(i);
-        total += code >= 97 ? code - 97 + 1 : code - 65 + 27;
+        total += code >= CHAR_A ? code - CHAR_A + 1 : code - CHAR_a + 27;
         break;
       }
     }
@@ -51,7 +53,7 @@ function part2() {
       const char = c.charAt(j);
       if (sa.has(char) && sb.has(char)) {
         const code = c.charCodeAt(j);
-        total += code >= 97 ? code - 97 + 1 : code - 65 + 27;
+        total += code >= CHAR_A ? code - CHAR_A + 1 : code - CHAR_a + 27;
         break;
       }
     }
