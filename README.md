@@ -11,13 +11,15 @@ Included is code from Advent of Code 2022. Each day has a folder, with solution 
 As an example, to run day one code in debug mode (with small input file):
 
 ```bash
-cd day1 && node main debug
+cd day1
+node main debug
 ```
 
 To run with full size input file, simply exclude the `debug` argument:
 
 ```bash
-cd day1 && node main
+cd day1
+node main
 ```
 
 ## Files
