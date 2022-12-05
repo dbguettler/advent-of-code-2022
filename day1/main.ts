@@ -1,7 +1,7 @@
-const utils = require("../shared/utils");
+import { getLines } from "../shared/utils";
 
 const startTime = Date.now();
-const lines = utils.getLines(process.argv);
+const lines = getLines(process.argv);
 
 let max = [0, 0, 0];
 let sum = 0;
