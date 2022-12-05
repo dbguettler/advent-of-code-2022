@@ -1,12 +1,9 @@
-const rf = require("fs").readFileSync;
+const utils = require("../shared/utils");
 
 function part1() {
   console.time("Runtime 1");
-  const [stacksInput, instrInput] = rf(
-    `input-${process.argv[2] === "debug" ? "sm" : "lg"}.txt`
-  )
-    .toString()
-    .split("\n\n")
+  const [stacksInput, instrInput] = utils
+    .getLines(process.argv, "\n\n")
     .map((section) => section.split("\n"));
   const stacks = parseStacks(stacksInput);
   const instr = instrInput.map((ins) => parseInstr(ins));
@@ -21,11 +18,8 @@ function part1() {
 
 function part2() {
   console.time("Runtime 2");
-  const [stacksInput, instrInput] = rf(
-    `input-${process.argv[2] === "debug" ? "sm" : "lg"}.txt`
-  )
-    .toString()
-    .split("\n\n")
+  const [stacksInput, instrInput] = utils
+    .getLines(process.argv, "\n\n")
     .map((section) => section.split("\n"));
   const stacks = parseStacks(stacksInput);
   const instr = instrInput.map((ins) => parseInstr(ins));
