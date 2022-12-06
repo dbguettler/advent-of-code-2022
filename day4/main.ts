@@ -1,16 +1,12 @@
-const utils = require("../shared/utils");
+import { getLines } from "../shared/utils";
 
 function part1() {
   console.time("Runtime 1");
   // Split input lines into pairs, then split pairs into ranges,
   // then split ranges into endpoints (and turn those into numbers)
-  const pairs = utils
-    .getLines(process.argv)
-    .map((line) =>
-      line
-        .split(",")
-        .map((range) => range.split("-").map((num) => parseInt(num)))
-    );
+  const pairs = getLines(process.argv).map((line) =>
+    line.split(",").map((range) => range.split("-").map((num) => parseInt(num)))
+  );
   let contain = 0;
 
   for (const pair of pairs) {
@@ -31,13 +27,9 @@ function part2() {
   console.time("Runtime 2");
   // Split input lines into pairs, then split pairs into ranges,
   // then split ranges into endpoints (and turn those into numbers)
-  const pairs = utils
-    .getLines(process.argv)
-    .map((line) =>
-      line
-        .split(",")
-        .map((range) => range.split("-").map((num) => parseInt(num)))
-    );
+  const pairs = getLines(process.argv).map((line) =>
+    line.split(",").map((range) => range.split("-").map((num) => parseInt(num)))
+  );
   let overlap = 0;
 
   for (const pair of pairs) {
