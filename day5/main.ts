@@ -61,9 +61,9 @@ function splitStackLine(line: string) {
 }
 
 function parseInstr(instr: string) {
-  return [...instr.matchAll(/[0-9]+/g)].map(
-    (numArr, idx) => parseInt(numArr[0]) - (idx === 0 ? 0 : 1)
-  );
+  const matches = instr.match(/[0-9]+/g);
+  if (matches === null) throw Error("Error parsing instruction");
+  return matches.map((numArr, idx) => parseInt(numArr) - (idx === 0 ? 0 : 1));
 }
 
 function executeMovePartOne(
