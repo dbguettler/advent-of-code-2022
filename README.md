@@ -38,6 +38,8 @@ cd day1
 node main
 ```
 
+Note that it is necessary to run from the specific day directory, as the input files are searched based on the directory that the command is run from.
+
 ## Files
 
 The main code file for each day is provided in `main.ts`, with the files `input-sm.txt` for the example small input file and `input-lg.txt` for the full size provided input. Any useful utility functions used across multiple days are included in `shared/utils.ts`.
