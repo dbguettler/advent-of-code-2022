@@ -1,5 +1,5 @@
 import { getLines } from "../shared/utils";
-import { Queue } from "../shared/queue";
+import Queue from "../shared/queue";
 
 function part1(): void {
   console.time("Runtime 1");

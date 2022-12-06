@@ -1,6 +1,6 @@
 import { NoElementException } from "./exceptions";
 
-export class Queue<QType> {
+export default class Queue<QType> {
   private arr: QType[];
 
   constructor() {
