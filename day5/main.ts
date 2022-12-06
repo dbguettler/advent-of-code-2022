@@ -1,4 +1,5 @@
 import { getLines } from "../shared/utils";
+import Stack from "../shared/stack";
 
 function part1() {
   console.time("Runtime 1");
@@ -10,7 +11,7 @@ function part1() {
 
   instr.forEach((ins) => executeMovePartOne(ins[0], ins[1], ins[2], stacks));
 
-  const output = stacks.map((stack) => stack.at(-1)).join("");
+  const output = stacks.map((stack) => stack.peek()).join("");
 
   console.timeEnd("Runtime 1");
   console.log(output);
@@ -26,28 +27,28 @@ function part2() {
 
   instr.forEach((ins) => executeMovePartTwo(ins[0], ins[1], ins[2], stacks));
 
-  const output = stacks.map((stack) => stack.at(-1)).join("");
+  const output = stacks.map((stack) => stack.peek()).join("");
   console.timeEnd("Runtime 2");
   console.log(output);
 }
 
-function parseStacks(rows: string[]): string[][] {
+function parseStacks(rows: string[]): Stack<string>[] {
   rows.reverse();
   let splitRows = rows.map((row) => splitStackLine(row));
   const colCount = splitRows[0].length;
   splitRows.shift();
   // Change from array of rows to array of columns
-  splitRows = splitRows.reduce(
+  const stacks = splitRows.reduce(
     (prevValue, currentItem) => {
       for (let i = 0; i < colCount; i++) {
         if (currentItem[i] !== " ") prevValue[i].push(currentItem[i]);
       }
       return prevValue;
     },
-    Array.from(Array(colCount), () => new Array(0))
+    Array.from(Array(colCount), () => new Stack<string>())
   );
 
-  return splitRows;
+  return stacks;
 }
 
 function splitStackLine(line: string) {
@@ -70,7 +71,7 @@ function executeMovePartOne(
   count: number,
   from: number,
   to: number,
-  stacks: string[][]
+  stacks: Stack<string>[]
 ) {
   for (let i = 0; i < count; i++) {
     const item = stacks[from].pop();
@@ -83,10 +84,15 @@ function executeMovePartTwo(
   count: number,
   from: number,
   to: number,
-  stacks: string[][]
+  stacks: Stack<string>[]
 ) {
-  const popped = stacks[from].splice(stacks[from].length - count, count);
-  stacks[to].push(...popped);
+  const intermediate = new Stack<string>();
+  for (let i = 0; i < count; i++) {
+    intermediate.push(stacks[from].pop());
+  }
+  for (let i = 0; i < count; i++) {
+    stacks[to].push(intermediate.pop());
+  }
 }
 
 part1();
