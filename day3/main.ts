@@ -1,4 +1,4 @@
-const utils = require("../shared/utils");
+import { getLines } from "../shared/utils";
 const CHAR_A = 97;
 const CHAR_a = 65;
 
@@ -7,7 +7,7 @@ const CHAR_a = 65;
  */
 function part1() {
   console.time("Runtime 1");
-  const lines = utils.getLines(process.argv);
+  const lines = getLines(process.argv);
 
   let total = 0;
   for (const line of lines) {
@@ -33,7 +33,7 @@ function part1() {
  */
 function part2() {
   console.time("Runtime 2");
-  const lines = utils.getLines(process.argv);
+  const lines = getLines(process.argv);
 
   let total = 0;
   for (let i = 0; i < lines.length; i += 3) {
