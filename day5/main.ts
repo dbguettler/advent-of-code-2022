@@ -1,14 +1,14 @@
-const utils = require("../shared/utils");
+import { getLines } from "../shared/utils";
 
 function part1() {
   console.time("Runtime 1");
-  const [stacksInput, instrInput] = utils
-    .getLines(process.argv, "\n\n")
-    .map((section) => section.split("\n"));
+  const [stacksInput, instrInput] = getLines(process.argv, "\n\n").map(
+    (section) => section.split("\n")
+  );
   const stacks = parseStacks(stacksInput);
   const instr = instrInput.map((ins) => parseInstr(ins));
 
-  instr.forEach((ins) => executeMovePartOne(...ins, stacks));
+  instr.forEach((ins) => executeMovePartOne(ins[0], ins[1], ins[2], stacks));
 
   const output = stacks.map((stack) => stack.at(-1)).join("");
 
@@ -18,24 +18,26 @@ function part1() {
 
 function part2() {
   console.time("Runtime 2");
-  const [stacksInput, instrInput] = utils
-    .getLines(process.argv, "\n\n")
-    .map((section) => section.split("\n"));
+  const [stacksInput, instrInput] = getLines(process.argv, "\n\n").map(
+    (section) => section.split("\n")
+  );
   const stacks = parseStacks(stacksInput);
   const instr = instrInput.map((ins) => parseInstr(ins));
 
-  instr.forEach((ins) => executeMovePartTwo(...ins, stacks));
+  instr.forEach((ins) => executeMovePartTwo(ins[0], ins[1], ins[2], stacks));
 
   const output = stacks.map((stack) => stack.at(-1)).join("");
   console.timeEnd("Runtime 2");
   console.log(output);
 }
 
-function parseStacks(rows) {
+function parseStacks(rows: string[]): string[][] {
   rows.reverse();
-  rows = rows.map((row) => splitStackLine(row));
-  const colCount = rows.shift().length;
-  rows = rows.reduce(
+  let splitRows = rows.map((row) => splitStackLine(row));
+  const colCount = splitRows[0].length;
+  splitRows.shift();
+  // Change from array of rows to array of columns
+  splitRows = splitRows.reduce(
     (prevValue, currentItem) => {
       for (let i = 0; i < colCount; i++) {
         if (currentItem[i] !== " ") prevValue[i].push(currentItem[i]);
@@ -45,10 +47,10 @@ function parseStacks(rows) {
     Array.from(Array(colCount), () => new Array(0))
   );
 
-  return rows;
+  return splitRows;
 }
 
-function splitStackLine(line) {
+function splitStackLine(line: string) {
   const cols = [];
   line = line.substring(1);
   for (let i = 0; i < line.length; i += 4) {
@@ -58,19 +60,31 @@ function splitStackLine(line) {
   return cols;
 }
 
-function parseInstr(instr) {
+function parseInstr(instr: string) {
   return [...instr.matchAll(/[0-9]+/g)].map(
-    (numArr, idx) => parseInt(numArr.at(0)) - (idx === 0 ? 0 : 1)
+    (numArr, idx) => parseInt(numArr[0]) - (idx === 0 ? 0 : 1)
   );
 }
 
-function executeMovePartOne(count, from, to, stacks) {
+function executeMovePartOne(
+  count: number,
+  from: number,
+  to: number,
+  stacks: string[][]
+) {
   for (let i = 0; i < count; i++) {
-    stacks[to].push(stacks[from].pop());
+    const item = stacks[from].pop();
+    if (!item) throw new Error("Stack is empty");
+    stacks[to].push(item);
   }
 }
 
-function executeMovePartTwo(count, from, to, stacks) {
+function executeMovePartTwo(
+  count: number,
+  from: number,
+  to: number,
+  stacks: string[][]
+) {
   const popped = stacks[from].splice(stacks[from].length - count, count);
   stacks[to].push(...popped);
 }
