@@ -1,8 +1,8 @@
 # Advent of Code 2022
 
-![Current Day Badge](https://img.shields.io/badge/day%20📅-6-blue)
-![Stars Badge](https://img.shields.io/badge/stars%20⭐-12-yellow)
-![Days Completed Badge](https://img.shields.io/badge/days%20completed-6-red)
+![Current Day Badge](https://img.shields.io/badge/day%20📅-7-blue)
+![Stars Badge](https://img.shields.io/badge/stars%20⭐-14-yellow)
+![Days Completed Badge](https://img.shields.io/badge/days%20completed-7-red)
 
 Included is code from Advent of Code 2022. Each day has a folder, with solution code and the debug and given input files.
 
