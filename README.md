@@ -6,6 +6,20 @@
 
 Included is code from Advent of Code 2022. Each day has a folder, with solution code and the debug and given input files.
 
+## Installing Dependencies
+
+You will need to have node and npm installed, I recommend using `nvm` to install both. [This guide](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl#install-nvm-nodejs-and-npm), while suited for WSL, worked well for me.
+
+Then, you will need to install typescript globally, using:
+```
+npm i -g typescript
+```
+
+Finally, you will need to install NodeJS type definitions, by running the following in the repo root:
+```
+npm i
+```
+
 ## Compiling
 
 To compile all code, run
