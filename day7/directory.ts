@@ -16,6 +16,9 @@ export default class Directory {
   /** Name of the directory */
   private readonly name: string;
 
+  /** Size of the directory */
+  private size: number;
+
   /**
    * Constructs a new Directory instance.
    * @param name the name of the directory (required)
@@ -23,16 +26,12 @@ export default class Directory {
    * @param files the files located in this directory (if unspecified, empty array)
    * @param children the subdirectories of this directory (if unspecified, empty array)
    */
-  constructor(
-    name: string,
-    parent: Directory | null = null,
-    files: File[] = [],
-    children: Directory[] = []
-  ) {
+  constructor(name: string, parent: Directory | null = null) {
     this.name = name;
-    this.files = files;
-    this.children = children;
+    this.files = [];
+    this.children = [];
     this.parent = parent;
+    this.size = 0;
   }
 
   /**
@@ -49,10 +48,7 @@ export default class Directory {
    * @returns the directory's size, recursively
    */
   getSize(): number {
-    return (
-      this.files.reduce((size, f) => size + f.getSize(), 0) +
-      this.children.reduce((size, d) => size + d.getSize(), 0)
-    );
+    return this.size;
   }
 
   /**
@@ -69,6 +65,7 @@ export default class Directory {
    */
   addFile(f: File): void {
     this.files.push(f);
+    this.propogateAdd(f.getSize());
   }
 
   /**
@@ -102,5 +99,17 @@ export default class Directory {
       list.push(...dir.getAllSubdirectories());
     }
     return list;
+  }
+
+  /**
+   * When a file is added, add the file size to its parent directory, and then propogate
+   * the change in size all the way up to the root directory.
+   * @param fSize The size of the file that was just added.
+   */
+  private propogateAdd(fSize: number) {
+    this.size += fSize;
+    if (this.parent !== null) {
+      this.parent.propogateAdd(fSize);
+    }
   }
 }
