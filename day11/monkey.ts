@@ -5,10 +5,16 @@ export default class Monkey {
   private trueMonkey: number;
   private falseMonkey: number;
   private inspections: number;
+  private big: boolean;
+  private bigMod: number | null;
 
-  constructor(lines: string) {
+  constructor(lines: string, big: boolean = false) {
     // Set inspections to 0;
     this.inspections = 0;
+
+    // Set big
+    this.big = big;
+    this.bigMod = null;
 
     const splitLines = lines.split("\n");
     // We don't care about the first line, it only contains the Monkey's number.
@@ -82,8 +88,18 @@ export default class Monkey {
     // Increment inspection count
     this.inspections += this.items.length;
 
-    // Divide all worry levels by 3
-    this.items = this.items.map((item) => Math.floor(item / 3));
+    // Divide all worry levels by 3 if !this.big
+    if (!this.big) {
+      this.items = this.items.map((item) => Math.floor(item / 3));
+    } else {
+      // Must handle big numbers by modding by bigMod.
+      // If bigMod is unset, throw an error
+      if (this.bigMod === null) {
+        throw new Error("bigMod value unset.");
+      }
+      this.items = this.items.map((item) => item % this.bigMod!);
+    }
+
     const throwItems = this.items.map((item) => {
       return {
         item: item,
@@ -102,6 +118,14 @@ export default class Monkey {
 
   getInspectionCount(): number {
     return this.inspections;
+  }
+
+  getTest(): number {
+    return this.test;
+  }
+
+  setBigMod(bigMod: number): void {
+    this.bigMod = bigMod;
   }
 }
 

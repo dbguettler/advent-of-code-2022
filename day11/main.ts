@@ -1,6 +1,5 @@
 import { getLines } from "../shared/utils";
 import Monkey from "./monkey";
-import BigMonkey from "./bigmonkey";
 
 function part1(): void {
   console.time("Runtime 1");
@@ -32,8 +31,14 @@ function part1(): void {
 function part2(): void {
   console.time("Runtime 2");
   const monkeyLines = getLines(process.argv, "\n\n");
-  const monkeys = monkeyLines.map((monk) => new BigMonkey(monk));
+  const monkeys = monkeyLines.map((monk) => new Monkey(monk, true));
   const ROUNDS = 10000;
+
+  const testvalues = monkeys.map((monkey) => monkey.getTest());
+  console.time("Calculate LCM");
+  const lcm = getLCM(...testvalues);
+  console.timeEnd("Calculate LCM");
+  monkeys.forEach((monkey) => monkey.setBigMod(lcm));
 
   // Complete 10000 rounds.
   for (let round = 0; round < ROUNDS; round++) {
@@ -54,6 +59,17 @@ function part2(): void {
 
   console.timeEnd("Runtime 2");
   console.log(monkeyBusiness);
+}
+
+// Somewhat slow but functional way to get LCM of a set of numbers.
+function getLCM(...nums: number[]): number {
+  if (!nums.length) throw new Error("No values provided");
+  const iNums = nums.map((num) => ({ og: num, inc: num }));
+  while (!iNums.every((entry) => entry.inc === iNums[0].inc)) {
+    iNums.sort((a, b) => a.inc - b.inc);
+    iNums[0].inc += iNums[0].og;
+  }
+  return iNums[0].inc;
 }
 
 part1();
