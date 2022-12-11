@@ -34,9 +34,9 @@ function part2(): void {
   const monkeys = monkeyLines.map((monk) => new Monkey(monk, true));
   const ROUNDS = 10000;
 
-  const testvalues = monkeys.map((monkey) => monkey.getTest());
+  const testValues = monkeys.map((monkey) => monkey.getTest());
   console.time("Calculate LCM");
-  const lcm = getLCM(...testvalues);
+  const lcm = getLCM(...testValues);
   console.timeEnd("Calculate LCM");
   monkeys.forEach((monkey) => monkey.setBigMod(lcm));
 
