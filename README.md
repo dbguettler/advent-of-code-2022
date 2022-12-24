@@ -1,6 +1,6 @@
 # Advent of Code 2022
 
-![Current Day Badge](https://img.shields.io/badge/day%20📅-23-blue)
+![Current Day Badge](https://img.shields.io/badge/day%20📅-24-blue)
 ![Stars Badge](https://img.shields.io/badge/stars%20⭐-30-yellow)
 ![Days Completed Badge](https://img.shields.io/badge/days%20completed-15-red)
 
